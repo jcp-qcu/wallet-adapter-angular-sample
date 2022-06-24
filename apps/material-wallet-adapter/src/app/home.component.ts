@@ -11,109 +11,55 @@ import { isNotNull } from './operators';
 @Component({
   selector: 'wa-home',
   template: `
-    <header>
-      <h1>@heavy-duty/wallet-adapter example</h1>
-    </header>
+    <div
+      class="login-container login login-1 login-auth-on d-flex flex-column flex-lg-row flex-row-fluid bg-white"
+    >
+      <div
+        class="login-aside d-flex flex-row-auto bgi-size-cover bgi-no-repeat p-10 p-lg-10"
+      ></div>
 
-    <main>
-      <mat-card class="mb-6">
-        <h2 class="mb-4">
-          Wallet details ({{ walletName$ | async }} -
-          <ng-container *ngIf="ready$ | async">(READY)</ng-container>)
-        </h2>
-
-        <div class="mb-4">
-          <hd-wallet-multi-button></hd-wallet-multi-button>
-        </div>
-
-        <p
-          class="bg-black bg-opacity-10 px-4 py-2 rounded-md inline-block"
-          *ngIf="publicKey$ | async as publicKey"
+      <div
+        class="login-aside-right container flex-row-fluid d-flex flex-column position-relative p-7 overflow-hidden"
+      >
+        <div
+          class="aside-right-inner d-flex flex-column-fluid flex-center mt-30 mt-lg-0"
         >
-          <span>
-            {{ publicKey.toBase58() }}
-          </span>
+          <div class="login-form login-auth">
+            <div class="mb-1r">
+              <div class="d-flex">
+                <h3 class="sign-in-header">WELCOME BACK</h3>
+              </div>
 
-          <button mat-icon-button [cdkCopyToClipboard]="publicKey.toBase58()">
-            <mat-icon>content_copy</mat-icon>
-          </button>
-        </p>
-      </mat-card>
+              <div class="form-group">
+                <div
+                  class="mt37 form-group d-flex flex-wrap justify-content-between align-items-center"
+                >
+                  <div class="mb-4">
+                    <hd-wallet-multi-button></hd-wallet-multi-button>
+                  </div>
 
-      <mat-card class="mb-6">
-        <h2>Transaction</h2>
-        <form *ngIf="publicKey$ | async as publicKey" [formGroup]="form">
-          <mat-form-field class="block w-72">
-            <mat-label>Recipient</mat-label>
-            <input
-              type="text"
-              formControlName="recipient"
-              matInput
-              placeholder="Enter recipient"
-            />
-          </mat-form-field>
+                  <p
+                    class="bg-black bg-opacity-10 px-4 py-2 rounded-md inline-block"
+                    *ngIf="publicKey$ | async as publicKey"
+                  >
+                    <span>
+                      {{ publicKey.toBase58() }}
+                    </span>
 
-          <mat-form-field class="block w-72">
-            <mat-label>Lamports</mat-label>
-            <input
-              type="number"
-              matInput
-              formControlName="lamports"
-              placeholder="Enter lamports"
-            />
-          </mat-form-field>
-
-          <div>
-            <button
-              (click)="onSendTransaction(publicKey)"
-              type="button"
-              mat-raised-button
-              color="primary"
-            >
-              Send Transaction
-            </button>
-            <button
-              (click)="onSignTransaction(publicKey)"
-              type="button"
-              mat-raised-button
-              color="primary"
-            >
-              Sign Transaction
-            </button>
-            <button
-              (click)="onSignAllTransactions(publicKey)"
-              type="button"
-              mat-raised-button
-              color="primary"
-            >
-              Sign All Transactions
-            </button>
-            <button
-              (click)="onSignMessage()"
-              type="button"
-              mat-raised-button
-              color="primary"
-            >
-              Sign Message
-            </button>
+                    <button
+                      mat-icon-button
+                      [cdkCopyToClipboard]="publicKey.toBase58()"
+                    >
+                      <mat-icon>content_copy</mat-icon>
+                    </button>
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-        </form>
-      </mat-card>
-
-      <mat-card>
-        <h2>Message</h2>
-        <div>
-          <button
-            (click)="onSignMessage()"
-            type="button"
-            mat-raised-button
-            color="primary"
-          >
-            Sign Message
-          </button>
         </div>
-      </mat-card>
-    </main>
+      </div>
+    </div>
   `,
 })
 export class HomeComponent {
